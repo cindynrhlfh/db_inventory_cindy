@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 </head>
 <body>
 <div class="container">
@@ -49,7 +50,7 @@
   </div>
 </nav>
     <h1>Data Barang </h1>
-    <a href="view_tambah.php" class="btn btn-primary">Tambah Barang Baru</a>
+    <a href="view_tambah.php" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Barang Baru</a>
     <br><br>
     <table class="table table-striped table-bordered">
   <thead>
@@ -65,7 +66,7 @@
   </thead>
   <?php 
      include '../../config/koneksi.php';
-     $query =mysqli_query($conn, "SELECT * FROM barang");
+     $query = mysqli_query($conn, "SELECT * FROM barang");
      $no=1;
      if(mysqli_num_rows($query)){
         while($result=mysqli_fetch_assoc($query)){
@@ -78,8 +79,11 @@
                 <td><?php echo $result['harga']?></td>
                 <td><?php echo $result['id_jenis']?></td>
                 <td>
-                    <a class="btn btn-info" href="#" role="button">EDIT</a>
-                    <a class="btn btn-warning" href="#" role="button">HAPUS</a>
+                <a href="view_edit.php?id_barang=<?php echo $result['id_barang']?>"
+                class="btn btn-danger"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                <a href="hapus.php?id_barang=<?php echo $result['id_barang']?>"
+                onclick="return confirm('Kamu yakin?')"
+                class="btn btn-warning"><i class="fa-solid fa-trash"></i>Hapus</a>
                 </td>
             </tr>
             <?php

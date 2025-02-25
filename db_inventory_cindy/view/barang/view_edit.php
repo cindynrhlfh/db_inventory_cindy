@@ -34,39 +34,41 @@
     </div>
   </div>
 </nav>
-    <h1>Data Jenis </h1>
-    <a href="view_tambah.php" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Jenis Baru</a>
-    <br><br>
-    <table class="table table-striped table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">ID Jenis</th>
-      <th scope="col">Nama jenis</th>
-      <th scope="col">Aksi</th>
-    </tr>
-  </thead>
-  <?php 
-     include '../../config/koneksi.php';
-     $query =mysqli_query($conn, "SELECT * FROM jenis");
-  
-     if(mysqli_num_rows($query)){
-        while($result=mysqli_fetch_assoc($query)){
-            ?>
-            <tr>
-               
-                <td><?php echo $result['id_jenis']?></td>
-                <td><?php echo $result['nama_jenis']?></td>
-                <td>
-                    <a href="view_edit.php?id_jenis=<?php echo $result['id_jenis']?>"
-                     class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
-                </td>
-            </tr>
-            <?php
-      
-        }
-     }
-     ?>
-</table>
+    <h1>Data Barang</h1> <br>
+    <?php
+         include '../../config/koneksi.php';
+         $id_barang=$_GET['id_barang'];
+         $query = mysqli_query($conn, "SELECT * FROM barang WHERE id_barang='$id_barang'");
+         $result=mysqli_fetch_assoc($query);
+    ?>
+    <form action="proses_edit.php?id_barang=<?php echo $result['id_barang']?>"method="POST">
+<div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">ID barang</label>
+    <input type="number" class="form-control"name="id_barang"
+    value="<?php echo $result['id_barang']?>" id="exampleInputEmail1" aria-describedby="emailHelp" >
+</div>
+<div class="mb-3">
+<label for="exampleInputEmail1" class="form-label">Nama barang</label>
+    <input type="text" class="form-control"name="nama_barang"
+    value="<?php echo $result['nama_barang']?>" id="exampleInputEmail1">
+</div>
+<div class="mb-3">
+<label for="exampleInputEmail1" class="form-label">Stok</label>
+    <input type="text" class="form-control"name="stok"
+    value="<?php echo $result['stok']?>" id="exampleInputEmail1">
+</div>
+<div class="mb-3">
+<label for="exampleInputEmail1" class="form-label">Harga</label>
+    <input type="text" class="form-control"name="harga"
+    value="<?php echo $result['harga']?>" id="exampleInputEmail1">
+</div>
+<div class="mb-3">
+<label for="exampleInputEmail1" class="form-label">ID Jenis</label>
+    <input type="text" class="form-control"name="id_jenis"
+    value="<?php echo $result['id_jenis']?>" id="exampleInputEmail1">
+</div>
+<button type="submit" class="btn btn-primary">submit</button>
+</form>
 </div>
 </body>
 </html>
